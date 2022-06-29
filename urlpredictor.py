@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import argparse, os, random, sys
+import argparse, os, random, sys, ktrain
 #import numpy as np
 #import pickle
 import urllib.parse
@@ -79,10 +79,8 @@ def main(argv=sys.argv[1:]):
     httpd = ThreadedHTTPServer(server_address, ProxyHTTPRequestHandler)
     httpd.serve_forever()
 def ml_model():
-    #predictor = ktrain.load_predictor(args.load_my_model)
-    #new_model = ktrain.get_predictor(predictor.model, predictor.preproc)
-    predictor = load_model(load_my_model)
-    new_model = predictor
+    predictor = ktrain.load_predictor(args.load_my_model)
+    new_model = ktrain.get_predictor(predictor.model, predictor.preproc)
     return new_model
 if __name__ == '__main__':
     try:
