@@ -58,7 +58,7 @@ class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
     protocol_version = 'HTTP/1.1'
     def do_POST(self, body=True):
         postvars = parse_POST(self)
-        for key, value in postvars():
+        for key, value in postvars:
             if key == 'url':
                 url = value
 
