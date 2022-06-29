@@ -73,10 +73,8 @@ class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         """Handle requests in a separate thread."""
 def main(argv=sys.argv[1:]):
-    global hostname
     global protocol
     args = parse_args(argv)
-    hostname = args.hostname
     print('http server is starting on {} port {}...'.format(args.ip, args.port))
     server_address = (args.ip, args.port)
     protocol = args.protocol
