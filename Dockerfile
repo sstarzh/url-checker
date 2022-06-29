@@ -6,11 +6,7 @@ ENV PROTO=http
 ENV MODEL=distilbert
 
 COPY requirements.txt /
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y upgrade
 RUN pip3 install -r requirements.txt
 # Copy predictor script and ML model
 COPY urlpredictor.py /

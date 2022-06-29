@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse, os, random, sys
-import numpy as np
+#import numpy as np
 #import pickle
 import urllib.parse
 from tensorflow.keras.models import load_model

@@ -1,5 +1,4 @@
 scikit-learn>=1.0.0
-numpy
 urllib
 json
 cgi
