@@ -16,12 +16,7 @@ from cgi import parse_header, parse_multipart
 from urllib.parse import parse_qs
 
 load_my_model = 'distilbert'
-def set_header():
-    headers = {
-        'Host': hostname
-    }
 
-    return headers
 def parse_args(argv=sys.argv[1:]):
     parser = argparse.ArgumentParser(description='Proxy HTTP requests')
     parser.add_argument('--port', dest='port', type=int, default=8081,
