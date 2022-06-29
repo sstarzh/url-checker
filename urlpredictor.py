@@ -58,7 +58,7 @@ class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
     protocol_version = 'HTTP/1.1'
     def do_POST(self, body=True):
         postvars = parse_POST(self)
-        result = proc(postvars["url"])
+        result = proc(postvars[0])
         data = {}
         data['inference'] = result
         json_data = json.dumps(data)
