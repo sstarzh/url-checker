@@ -62,7 +62,7 @@ class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
         result = proc(postvars)
         data = {}
         data['inference'] = result
-        json_resp = json.dumps(data)
+        json_resp = bytes(json.dumps(data))
         self.send_response(200, "OK")
         self.wfile.write(json_resp)
         self.send_header("Content-Type", "application/json")
