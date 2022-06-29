@@ -15,7 +15,7 @@ import json
 from cgi import parse_header, parse_multipart
 from urllib.parse import parse_qs
 
-load_my_model = 'distilbert'
+load_my_model = 'distilbert/tf_model.h5'
 
 def parse_args(argv=sys.argv[1:]):
     parser = argparse.ArgumentParser(description='Proxy HTTP requests')
