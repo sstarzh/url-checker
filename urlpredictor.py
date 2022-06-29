@@ -63,11 +63,11 @@ class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
         data = {}
         data['inference'] = result
         json_resp = bytes(json.dumps(data), 'utf-8')
-        self.send_response(200, "OK")
-        self.wfile.write(json_resp)
+        self.send_response(200)
         self.send_header("Content-Type", "application/json")
         self.send_header('Content-Length', len(json_resp))
         self.end_headers()
+        self.wfile.write(json_resp)
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         """Handle requests in a separate thread."""
