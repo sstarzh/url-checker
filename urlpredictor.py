@@ -48,7 +48,8 @@ def parse_POST(self):
         length = int(self.headers.get('Content-length', 0))
         if length > 0:
             body = self.rfile.read(length).decode()
-            postvars = parse_qs(body)
+            json_body = json.loads(body)
+            postvars = json_body['url']
         else:
             postvars = {}
         print(postvars)
@@ -58,11 +59,7 @@ class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
     protocol_version = 'HTTP/1.1'
     def do_POST(self, body=True):
         postvars = parse_POST(self)
-        for key, value in postvars:
-            if key == 'url':
-                url = value
-
-        result = proc(url)
+        result = proc(postvars)
         data = {}
         data['inference'] = result
         json_data = json.dumps(data)
