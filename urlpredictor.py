@@ -45,14 +45,10 @@ def proc(req):
         return resp
 
 def parse_POST(self):
-        ctype, pdict = parse_header(self.headers['content-type'])
-        if ctype == 'multipart/form-data':
-            postvars = parse_multipart(self.rfile, pdict)
-        elif ctype == 'application/x-www-form-urlencoded':
-            length = int(self.headers['content-length'])
-            postvars = parse_qs(
-                    self.rfile.read(length), 
-                    keep_blank_values=1)
+        length = int(self.headers.get('Content-length', 0))
+        if length > 0:
+            body = self.rfile.read(length).decode()
+            postvars = parse_qs(body)
         else:
             postvars = {}
         return postvars
@@ -60,8 +56,8 @@ def parse_POST(self):
 class ProxyHTTPRequestHandler(BaseHTTPRequestHandler):
     protocol_version = 'HTTP/1.1'
     def do_POST(self, body=True):
-        postvars = self.parse_POST()
-        result = proc(postvars.URL)
+        postvars = parse_POST(self)
+        result = proc(postvars["url"][0])
         data = {}
         data['inference'] = result
         json_data = json.dumps(data)
